@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piosk App</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: #004d00;
+  color: #00ff00;
+  font-family: monospace, monospace;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-frame {
+  flex-grow: 1;
+  border: none;
+  width: 100%;
+}
+
+.divider {
+  height: 2px;
+  background: #00ff00;
+  width: 100%;
+}
+
+.navbar {
+  height: 70px;
+  background: #003300;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.pi-control, .back-button {
+  width: 60px;
+  height: 60px;
+  background: #003300;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+.pi-control:hover, .back-button:hover {
+  background: #00bb00;
+  color: #004d00;
+}
+</style>
+</head>
+<body>
+
+<iframe id="appFrame" class="app-frame"></iframe>
+
+<div class="divider"></div>
+
+<div class="navbar">
+  <div class="back-button" id="backButton">←</div>
+  <div class="pi-control" id="piButton">π</div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+let url = params.get('show');
+if (!url) url = 'crash/critical.html?code=054&error=Failed%20to%20launch%20app&script=appmgr.wui';
+document.getElementById('appFrame').src = url;
+
+const piButton = document.getElementById('piButton');
+const backButton = document.getElementById('backButton');
+
+// Fetch the actions WUI and append it
+fetch('ui/actions.wui')
+  .then(r => r.text())
+  .then(html => {
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.appendChild(container);
+  });
+
+// π button calls showActions() from the WUI
+piButton.addEventListener('click', () => {
+  if (window.showActions) window.showActions();
+});
+
+// Back button redirects to home
+backButton.addEventListener('click', () => {
+  window.location.href = 'home.html';
+});
+</script>
+
+</body>
+</html>
