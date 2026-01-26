@@ -1,1 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piosk Home</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background: #004d00;
+  color: #00ff00;
+  font-family: monospace, monospace;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
 
+.header {
+  padding: 20px;
+  font-size: 2rem;
+}
+
+.main-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.main-buttons button {
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  background: #003300;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.main-buttons button:hover {
+  background: #00bb00;
+  color: #004d00;
+}
+
+.divider {
+  height: 2px;
+  background: #00ff00;
+  width: 100%;
+}
+
+.navbar {
+  height: 70px;
+  background: #003300;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.pi-control {
+  width: 60px;
+  height: 60px;
+  background: #003300;
+  border: 2px solid #00ff00;
+  border-radius: 5px;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pi-control:hover {
+  background: #00bb00;
+  color: #004d00;
+}
+</style>
+</head>
+<body>
+
+<div class="header">Piosk Home</div>
+
+<div class="main-buttons">
+  <button onclick="window.location.href='app.html?show=https://example.com/app1'">App 1</button>
+  <button onclick="window.location.href='app.html?show=https://example.com/app2'">App 2</button>
+  <button onclick="window.location.href='app.html?show=https://example.com/app3'">App 3</button>
+  <button onclick="window.location.href='app.html?show=https://example.com/app4'">App 4</button>
+</div>
+
+<div class="divider"></div>
+
+<div class="navbar">
+  <div class="pi-control" id="piButton">π</div>
+</div>
+
+<script>
+const piButton = document.getElementById('piButton');
+
+// Fetch the actions WUI and append it
+fetch('ui/actions.wui')
+  .then(r => r.text())
+  .then(html => {
+    const container = document.createElement('div');
+    container.innerHTML = html;
+    document.body.appendChild(container);
+  });
+
+// Call showActions() from the WUI when π button is clicked
+piButton.addEventListener('click', () => {
+  if (window.showActions) window.showActions();
+});
+</script>
+
+</body>
+</html>
