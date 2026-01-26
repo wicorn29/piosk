@@ -19,41 +19,27 @@
     overflow: hidden;
   }
 
-  .boot-text {
-    font-size: 6rem;
-    font-weight: bold;
-    color: #00ff00;
-    position: relative;
+  /* Container for the three π symbols */
+  .pi-container {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
+    font-size: 6rem;
+    color: #00ff00;
   }
 
-  .boot-text span {
-    position: relative;
+  .pi {
     display: inline-block;
-    color: #00ff00;
-    /* base text shadow for depth */
-    text-shadow: 2px 2px 0 #003300, 4px 4px 0 #006600, 6px 6px 0 #009900;
-    overflow: hidden;
+    animation: bounce 2s infinite; /* base animation */
   }
 
-  /* left-to-right swipe overlay */
-  .boot-text span::before {
-    content: attr(data-char);
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.0) 100%);
-    color: #00ff00;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: swipe 1.5s infinite linear;
-  }
+  /* staggered timing for sequence */
+  .pi:nth-child(1) { animation-delay: 0s; }
+  .pi:nth-child(2) { animation-delay: 0.7s; }
+  .pi:nth-child(3) { animation-delay: 1.4s; }
 
-  @keyframes swipe {
-    0% { left: -100%; }
-    100% { left: 100%; }
+  @keyframes bounce {
+    0%, 30%, 100% { transform: translateY(0); }
+    15% { transform: translateY(-40px); } /* move up */
   }
 
   .footer {
@@ -68,10 +54,10 @@
 </head>
 <body>
 
-<div class="boot-text">
-  <span data-char="π">π</span>
-  <span data-char="π">π</span>
-  <span data-char="π">π</span>
+<div class="pi-container">
+  <span class="pi">π</span>
+  <span class="pi">π</span>
+  <span class="pi">π</span>
 </div>
 
 <div class="footer">wicorn29</div>
