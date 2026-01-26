@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piosk Boot</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #004d00; /* dark green */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+
+<iframe id="bootFrame" src="throb/load.html"></iframe>
+
+<script>
+  // After 10 seconds, switch iframe to crash/critical.html with error params
+  setTimeout(() => {
+    const frame = document.getElementById('bootFrame');
+    const errorCode = 103;
+    const errorMsg = encodeURIComponent('Missing or corrupt OS');
+    const scriptName = encodeURIComponent('kernel.wui');
+    frame.src = `crash/critical.html?code=${errorCode}&error=${errorMsg}&script=${scriptName}`;
+  }, 10000); // 10,000ms = 10 seconds
+</script>
+
+</body>
+</html>
