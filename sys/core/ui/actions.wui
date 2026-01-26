@@ -1,18 +1,18 @@
 <!-- ui/actions.wui -->
 <style>
-/* Self-contained overlay style */
+/* Overlay is hidden by default */
 #actionsOverlay {
-  display: none; /* starts hidden */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,77,0,0.9);
-  display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  display: flex;
 }
 
 #actionsOverlayContent {
@@ -59,17 +59,16 @@
 (function() {
   const overlay = document.getElementById('actionsOverlay');
 
-  // Function to show the overlay
+  // Expose showActions globally
   window.showActions = function() {
     overlay.style.display = 'flex';
   };
 
-  // Function to hide the overlay
   function hideOverlay() {
     overlay.style.display = 'none';
   }
 
-  // Button click handling
+  // Button actions
   overlay.querySelectorAll('button').forEach(button => {
     button.addEventListener('click', () => {
       const action = button.dataset.action;
@@ -88,7 +87,7 @@
           break;
         case 'launchApp':
           const url = button.dataset.url;
-          if(url) window.location.href = url;
+          if(url) window.location.href = url; // optionally could open in iframe
           hideOverlay();
           break;
         case 'cancel':
@@ -101,7 +100,7 @@
     });
   });
 
-  // Clicking outside overlay content closes overlay
+  // Close overlay when clicking outside content
   overlay.addEventListener('click', e => {
     if(e.target === overlay) hideOverlay();
   });
