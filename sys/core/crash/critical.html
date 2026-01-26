@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<!-- usage: error.html?code=005&error=Failed%20to%20load%20config&script=boot.wap -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piosk Error</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #004d00; /* dark green */
+    color: #00ff00;      /* bright green accent */
+    font-family: monospace, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 40px;
+    box-sizing: border-box;
+  }
+
+  .sad-face {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0.3rem 0;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin: 0.2rem 0;
+    word-break: break-word;
+  }
+
+  .script {
+    font-size: 1rem;
+    color: #00bb00;
+    margin-top: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="sad-face">:(</div>
+<h1 id="error-code">Error -001</h1>
+<p id="message">An unexpected error occurred.</p>
+<p class="script" id="script">Unknown script</p>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code') || '-001';
+  const error = params.get('error') || 'An unexpected error occurred.';
+  const script = params.get('script') || 'Unknown script';
+
+  document.getElementById('error-code').textContent = `Error ${code}`;
+  document.getElementById('message').textContent = error;
+  document.getElementById('script').textContent = script;
+</script>
+
+</body>
+</html>
