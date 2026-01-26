@@ -1,0 +1,36 @@
+<!-- ui/actions.wui -->
+<div style="display:flex; flex-direction:column; gap:15px; align-items:center; min-width:200px;">
+  <button id="screenOffBtn">Screen Off</button>
+  <button id="rebootBtn">Reboot</button>
+  <button id="respringBtn">Respring</button>
+  <button id="cancelBtn">Cancel</button>
+</div>
+
+<script>
+  // Function to close the overlay
+  function closeOverlay() {
+    const overlay = document.getElementById('powerMenu');
+    if (overlay) overlay.style.display = 'none';
+  }
+
+  // Actions
+  document.getElementById('screenOffBtn').addEventListener('click', () => {
+    // Example placeholder functionality
+    alert('Screen Off triggered (placeholder)');
+    closeOverlay();
+  });
+
+  document.getElementById('rebootBtn').addEventListener('click', () => {
+    alert('Reboot triggered (placeholder)');
+    closeOverlay();
+  });
+
+  document.getElementById('respringBtn').addEventListener('click', () => {
+    alert('Respring triggered (placeholder)');
+    closeOverlay();
+  });
+
+  document.getElementById('cancelBtn').addEventListener('click', () => {
+    closeOverlay();
+  });
+</script>
